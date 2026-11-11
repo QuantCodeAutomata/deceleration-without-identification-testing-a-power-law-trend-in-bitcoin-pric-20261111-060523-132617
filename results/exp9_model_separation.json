@@ -1,0 +1,154 @@
+{
+  "n_observations_at_fit": 819,
+  "shared_theta_index": 394,
+  "theta_indices_per_model": {
+    "power_law": 394,
+    "drift_and_log_age": 394,
+    "gompertz": 394
+  },
+  "n_simulations_used": 4,
+  "n_simulations_paper": 1000,
+  "decisive_threshold_aic": 3.0,
+  "cutoff_years": [
+    2030,
+    2035,
+    2040,
+    2046
+  ],
+  "results": [
+    {
+      "true_model": "power_law",
+      "rival_model": "gompertz",
+      "cutoff_year": 2030,
+      "frac_true_decisive": 0.75,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "power_law",
+      "rival_model": "gompertz",
+      "cutoff_year": 2035,
+      "frac_true_decisive": 1.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "power_law",
+      "rival_model": "gompertz",
+      "cutoff_year": 2040,
+      "frac_true_decisive": 1.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "power_law",
+      "rival_model": "gompertz",
+      "cutoff_year": 2046,
+      "frac_true_decisive": 1.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "drift_and_log_age",
+      "rival_model": "power_law",
+      "cutoff_year": 2030,
+      "frac_true_decisive": 0.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "drift_and_log_age",
+      "rival_model": "power_law",
+      "cutoff_year": 2035,
+      "frac_true_decisive": 0.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "drift_and_log_age",
+      "rival_model": "power_law",
+      "cutoff_year": 2040,
+      "frac_true_decisive": 0.75,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "drift_and_log_age",
+      "rival_model": "power_law",
+      "cutoff_year": 2046,
+      "frac_true_decisive": 1.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "power_law",
+      "rival_model": "drift_and_log_age",
+      "cutoff_year": 2030,
+      "frac_true_decisive": 0.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "power_law",
+      "rival_model": "drift_and_log_age",
+      "cutoff_year": 2035,
+      "frac_true_decisive": 0.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "power_law",
+      "rival_model": "drift_and_log_age",
+      "cutoff_year": 2040,
+      "frac_true_decisive": 0.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "power_law",
+      "rival_model": "drift_and_log_age",
+      "cutoff_year": 2046,
+      "frac_true_decisive": 0.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "gompertz",
+      "rival_model": "power_law",
+      "cutoff_year": 2030,
+      "frac_true_decisive": 0.5,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "gompertz",
+      "rival_model": "power_law",
+      "cutoff_year": 2035,
+      "frac_true_decisive": 1.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "gompertz",
+      "rival_model": "power_law",
+      "cutoff_year": 2040,
+      "frac_true_decisive": 1.0,
+      "frac_rival_decisive": 0.0
+    },
+    {
+      "true_model": "gompertz",
+      "rival_model": "power_law",
+      "cutoff_year": 2046,
+      "frac_true_decisive": 1.0,
+      "frac_rival_decisive": 0.0
+    }
+  ],
+  "paper_expected": {
+    "power_law_vs_gompertz_2035": [
+      0.75,
+      0.98
+    ],
+    "power_law_vs_gompertz_2040": [
+      0.93,
+      1.0
+    ],
+    "drift_and_log_age_vs_power_law_2040": 0.19,
+    "drift_and_log_age_vs_power_law_2046": 0.71,
+    "power_law_vs_drift_and_log_age_all": 0.0,
+    "gompertz_vs_power_law_2046": 0.0
+  },
+  "elapsed_seconds": 507.0691804885864,
+  "notes": {
+    "deviation_model_note": "all three fits selected the same deviation grid member (index 394), consistent with the paper's finding that all three fits select the same deviation model (a near-random walk with a 3.5-year cycle); this shared member is used directly as the held-fixed deviation model for every simulated continuation and restricted refit below.",
+    "n_observations_vs_paper": "819 weekly observations used here vs. the paper's 820 (see exp5.py docstring / results/RESULTS.md for the data-source substitution); everything else follows the paper's construction unchanged.",
+    "simulation_count_reduced": "config.SEPARATION_N_SIMULATIONS_RUN=150 requested (n_requested=150); 4 actually used per 'true' model (3 x 4 = 12 continuations total), instead of the paper's 1000, so that the full sweep (3 true models x 4 cutoffs x n_simulations_used continuations x up to 3 trend refits each, with the restricted single-member Gompertz refit as the main cost, timed at calibration) fits the computing-time budget. Pass --full to attempt the paper's count (very slow; not run here).",
+    "gompertz_refit_simplification": "the Gompertz refit at each cutoff uses a bespoke single-stage restricted search (_refit_gompertz_fixed_theta: one bounded L-BFGS-B call against the shared held-fixed deviation model's covariance, reusing exp.exp6._nonlinear_ll for the likelihood evaluation) instead of src.trend_models.fit_nonlinear_model or exp.exp6._fit_nonlinear_restricted verbatim, because both of those look up a multi-member-grid reference (a fixed 'random walk, no cycle' member) that need not exist in -- and, per the paper's own finding of a 3.5-year cycle in the shared deviation model, does not exist in -- a one-element restricted grid.",
+    "future_volatility": "future weekly volatility enters only through the declared deviation family's covariance at the shared, held-fixed deviation model; no separate volatility parameter is introduced here (consistent with exp6's convention)."
+  }
+}

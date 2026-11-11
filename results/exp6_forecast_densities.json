@@ -1,0 +1,194 @@
+{
+  "n_observations": 819,
+  "target_years": [
+    2027,
+    2028,
+    2029,
+    2030
+  ],
+  "future_volatility_annual": 0.065,
+  "n_bootstrap_used": 12,
+  "n_bootstrap_paper": 49,
+  "models": [
+    {
+      "model_name": "constant_drift",
+      "fitted_log_likelihood": 723.2580682797413,
+      "theta_index": 254,
+      "params": {},
+      "n_successful_refits": 12,
+      "n_attempted_refits": 12,
+      "forecasts": [
+        {
+          "year": 2027,
+          "median_usd": 267639.70464747836,
+          "p05_usd": 85563.39753579294,
+          "p95_usd": 855335.570762143
+        },
+        {
+          "year": 2028,
+          "median_usd": 723968.5407417206,
+          "p05_usd": 198741.64792435907,
+          "p95_usd": 2654809.3193697543
+        },
+        {
+          "year": 2029,
+          "median_usd": 823899.22378226,
+          "p05_usd": 247975.88401594976,
+          "p95_usd": 2724119.390997864
+        },
+        {
+          "year": 2030,
+          "median_usd": 1045721.771331148,
+          "p05_usd": 269972.07896135264,
+          "p95_usd": 4003534.9132063612
+        }
+      ]
+    },
+    {
+      "model_name": "power_law",
+      "fitted_log_likelihood": 730.4386732956652,
+      "theta_index": 394,
+      "params": {},
+      "n_successful_refits": 12,
+      "n_attempted_refits": 12,
+      "forecasts": [
+        {
+          "year": 2027,
+          "median_usd": 262420.5451649827,
+          "p05_usd": 110622.67594742693,
+          "p95_usd": 504159.9698920453
+        },
+        {
+          "year": 2028,
+          "median_usd": 316877.29016922275,
+          "p05_usd": 143900.43438750706,
+          "p95_usd": 642319.2184370545
+        },
+        {
+          "year": 2029,
+          "median_usd": 240706.87841242005,
+          "p05_usd": 111000.2810128979,
+          "p95_usd": 508190.49418614956
+        },
+        {
+          "year": 2030,
+          "median_usd": 438455.6261597718,
+          "p05_usd": 164673.17800368066,
+          "p95_usd": 1005444.7054774886
+        }
+      ]
+    },
+    {
+      "model_name": "drift_and_log_age",
+      "fitted_log_likelihood": 730.656522780276,
+      "theta_index": 394,
+      "params": {},
+      "n_successful_refits": 12,
+      "n_attempted_refits": 12,
+      "forecasts": [
+        {
+          "year": 2027,
+          "median_usd": 225054.08882705937,
+          "p05_usd": 61966.25571776853,
+          "p95_usd": 573327.7688686877
+        },
+        {
+          "year": 2028,
+          "median_usd": 278194.68693424296,
+          "p05_usd": 102822.76755558528,
+          "p95_usd": 686234.5762575595
+        },
+        {
+          "year": 2029,
+          "median_usd": 209099.41575745234,
+          "p05_usd": 79018.08102419783,
+          "p95_usd": 524313.8471598709
+        },
+        {
+          "year": 2030,
+          "median_usd": 358201.3908583141,
+          "p05_usd": 75842.68760487062,
+          "p95_usd": 1206235.067393857
+        }
+      ]
+    },
+    {
+      "model_name": "logistic",
+      "fitted_log_likelihood": 728.2332266696765,
+      "theta_index": 306,
+      "params": {
+        "r": 0.010990691515018476,
+        "s0": 735.9017634584936
+      },
+      "n_successful_refits": 12,
+      "n_attempted_refits": 12,
+      "forecasts": [
+        {
+          "year": 2027,
+          "median_usd": 131511.9550229879,
+          "p05_usd": 67703.7181062933,
+          "p95_usd": 264934.0119538037
+        },
+        {
+          "year": 2028,
+          "median_usd": 155932.79153052394,
+          "p05_usd": 71631.75623341317,
+          "p95_usd": 359034.28758180066
+        },
+        {
+          "year": 2029,
+          "median_usd": 173359.30284592835,
+          "p05_usd": 73935.25271525489,
+          "p95_usd": 443336.12725052057
+        },
+        {
+          "year": 2030,
+          "median_usd": 185989.4656087038,
+          "p05_usd": 74437.42679903272,
+          "p95_usd": 523070.4477900432
+        }
+      ]
+    },
+    {
+      "model_name": "gompertz",
+      "fitted_log_likelihood": 730.4824135312322,
+      "theta_index": 394,
+      "params": {
+        "r": 0.002642874355790725
+      },
+      "n_successful_refits": 12,
+      "n_attempted_refits": 12,
+      "forecasts": [
+        {
+          "year": 2027,
+          "median_usd": 166060.0565996418,
+          "p05_usd": 77041.53188349282,
+          "p95_usd": 348281.40743101237
+        },
+        {
+          "year": 2028,
+          "median_usd": 201515.2639170483,
+          "p05_usd": 96595.15758394057,
+          "p95_usd": 432472.959858528
+        },
+        {
+          "year": 2029,
+          "median_usd": 150341.2497242932,
+          "p05_usd": 70610.22626268145,
+          "p95_usd": 328303.52687179594
+        },
+        {
+          "year": 2030,
+          "median_usd": 206037.54732677696,
+          "p05_usd": 78586.84340880241,
+          "p95_usd": 540348.7474388075
+        }
+      ]
+    }
+  ],
+  "elapsed_seconds": 593.0201559066772,
+  "notes": {
+    "bootstrap_count_reduced": "config.FORECAST_N_BOOTSTRAP_RUN=19 requested; 12 actually used, instead of the paper's 49, for computing time; see results/RESULTS.md. Pass --full to attempt the paper's count.",
+    "nonlinear_bootstrap_search": "logistic/Gompertz bootstrap refits search the nonlinear parameters from a single start (the original fit's own parameters) against the fitted model's own covariance as the stage-1 reference, instead of the original 24-point start grid against a fixed random-walk reference, because the small neighbour-restricted grid need not contain that reference member; see _fit_nonlinear_restricted docstring."
+  }
+}

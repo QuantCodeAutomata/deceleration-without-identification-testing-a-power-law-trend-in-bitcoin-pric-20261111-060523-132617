@@ -1,0 +1,331 @@
+{
+  "end_years": [
+    2026,
+    2030,
+    2036,
+    2046
+  ],
+  "q_features": {
+    "2026": 6,
+    "2030": 8,
+    "2036": 10,
+    "2046": 14
+  },
+  "n_observations": {
+    "2026": 820,
+    "2030": 1028,
+    "2036": 1341,
+    "2046": 1863
+  },
+  "volatility_scenarios": [
+    "flat",
+    "declining"
+  ],
+  "results": [
+    {
+      "end_year": 2026,
+      "volatility_scenario": "flat",
+      "model": "random_walk_cycle_lam1",
+      "critical_value": 2.6513894687257427,
+      "achieved_power": 0.35,
+      "oracle_bound": 0.54,
+      "worst_null_index": 4,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2026,
+      "volatility_scenario": "flat",
+      "model": "ar_c5_cycle_lam1",
+      "critical_value": 2.6513894687257427,
+      "achieved_power": 0.44,
+      "oracle_bound": 0.56,
+      "worst_null_index": 1,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2026,
+      "volatility_scenario": "flat",
+      "model": "random_walk_lam0",
+      "critical_value": 2.6513894687257427,
+      "achieved_power": 0.28,
+      "oracle_bound": 0.6,
+      "worst_null_index": 1,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2026,
+      "volatility_scenario": "declining",
+      "model": "random_walk_cycle_lam1",
+      "critical_value": 2.796359102385189,
+      "achieved_power": 0.41,
+      "oracle_bound": 0.54,
+      "worst_null_index": 5,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2026,
+      "volatility_scenario": "declining",
+      "model": "ar_c5_cycle_lam1",
+      "critical_value": 2.796359102385189,
+      "achieved_power": 0.36,
+      "oracle_bound": 0.36,
+      "worst_null_index": 3,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2026,
+      "volatility_scenario": "declining",
+      "model": "random_walk_lam0",
+      "critical_value": 2.796359102385189,
+      "achieved_power": 0.35,
+      "oracle_bound": 0.46,
+      "worst_null_index": 0,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2030,
+      "volatility_scenario": "flat",
+      "model": "random_walk_cycle_lam1",
+      "critical_value": 2.790312947793957,
+      "achieved_power": 0.52,
+      "oracle_bound": 0.7,
+      "worst_null_index": 3,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2030,
+      "volatility_scenario": "flat",
+      "model": "ar_c5_cycle_lam1",
+      "critical_value": 2.790312947793957,
+      "achieved_power": 0.48,
+      "oracle_bound": 0.7,
+      "worst_null_index": 9,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2030,
+      "volatility_scenario": "flat",
+      "model": "random_walk_lam0",
+      "critical_value": 2.790312947793957,
+      "achieved_power": 0.27,
+      "oracle_bound": 0.56,
+      "worst_null_index": 0,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2030,
+      "volatility_scenario": "declining",
+      "model": "random_walk_cycle_lam1",
+      "critical_value": 2.7404584461169677,
+      "achieved_power": 0.35,
+      "oracle_bound": 0.72,
+      "worst_null_index": 0,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2030,
+      "volatility_scenario": "declining",
+      "model": "ar_c5_cycle_lam1",
+      "critical_value": 2.7404584461169677,
+      "achieved_power": 0.58,
+      "oracle_bound": 0.72,
+      "worst_null_index": 9,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2030,
+      "volatility_scenario": "declining",
+      "model": "random_walk_lam0",
+      "critical_value": 2.7404584461169677,
+      "achieved_power": 0.45,
+      "oracle_bound": 0.56,
+      "worst_null_index": 0,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2036,
+      "volatility_scenario": "flat",
+      "model": "random_walk_cycle_lam1",
+      "critical_value": 2.5527308998092906,
+      "achieved_power": 0.72,
+      "oracle_bound": 0.78,
+      "worst_null_index": 5,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2036,
+      "volatility_scenario": "flat",
+      "model": "ar_c5_cycle_lam1",
+      "critical_value": 2.5527308998092906,
+      "achieved_power": 0.72,
+      "oracle_bound": 0.82,
+      "worst_null_index": 1,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2036,
+      "volatility_scenario": "flat",
+      "model": "random_walk_lam0",
+      "critical_value": 2.5527308998092906,
+      "achieved_power": 0.47,
+      "oracle_bound": 0.62,
+      "worst_null_index": 3,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2036,
+      "volatility_scenario": "declining",
+      "model": "random_walk_cycle_lam1",
+      "critical_value": 2.6411357810563416,
+      "achieved_power": 0.66,
+      "oracle_bound": 0.86,
+      "worst_null_index": 11,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2036,
+      "volatility_scenario": "declining",
+      "model": "ar_c5_cycle_lam1",
+      "critical_value": 2.6411357810563416,
+      "achieved_power": 0.75,
+      "oracle_bound": 0.9,
+      "worst_null_index": 5,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2036,
+      "volatility_scenario": "declining",
+      "model": "random_walk_lam0",
+      "critical_value": 2.6411357810563416,
+      "achieved_power": 0.53,
+      "oracle_bound": 0.74,
+      "worst_null_index": 6,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2046,
+      "volatility_scenario": "flat",
+      "model": "random_walk_cycle_lam1",
+      "critical_value": 2.695181872457809,
+      "achieved_power": 0.76,
+      "oracle_bound": 0.86,
+      "worst_null_index": 5,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2046,
+      "volatility_scenario": "flat",
+      "model": "ar_c5_cycle_lam1",
+      "critical_value": 2.695181872457809,
+      "achieved_power": 0.88,
+      "oracle_bound": 0.96,
+      "worst_null_index": 5,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2046,
+      "volatility_scenario": "flat",
+      "model": "random_walk_lam0",
+      "critical_value": 2.695181872457809,
+      "achieved_power": 0.62,
+      "oracle_bound": 0.84,
+      "worst_null_index": 0,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2046,
+      "volatility_scenario": "declining",
+      "model": "random_walk_cycle_lam1",
+      "critical_value": 2.586100662251482,
+      "achieved_power": 0.77,
+      "oracle_bound": 0.96,
+      "worst_null_index": 35,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2046,
+      "volatility_scenario": "declining",
+      "model": "ar_c5_cycle_lam1",
+      "critical_value": 2.586100662251482,
+      "achieved_power": 0.87,
+      "oracle_bound": 0.98,
+      "worst_null_index": 28,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    },
+    {
+      "end_year": 2046,
+      "volatility_scenario": "declining",
+      "model": "random_walk_lam0",
+      "critical_value": 2.586100662251482,
+      "achieved_power": 0.62,
+      "oracle_bound": 0.78,
+      "worst_null_index": 0,
+      "n_draws_power": 100,
+      "n_null_grid": 38
+    }
+  ],
+  "paper_oracle_range_2026": [
+    0.34,
+    0.43
+  ],
+  "paper_achieved_power_2026": 0.26,
+  "paper_oracle_range_2046": [
+    0.64,
+    0.86
+  ],
+  "notes": {
+    "exploratory": "Experiment 8 is an exploratory projection (paper Appendix J), not part of the frozen registered protocol.",
+    "synthetic_anchors": "Record lengths beyond 2026 have no realized price data; anchors are a synthetic weekly Saturday grid (pandas.date_range(..., freq='W-SAT')) using the same genesis-relative age-in-weeks formula as data_loader.build_weekly_series. end_year=2026 reproduces exp1/exp2's 820-anchor, q=6 setup exactly.",
+    "calibration_null_subgrid": "Calibration (and the achieved-power statistic's GridCache) uses every 16th member of the declared 1,216-model family (76 members), not the full family: building Sigma_theta for all 1,216 members at one record length alone measured ~90s at n_obs=820 and scales like n_obs^2 (n_obs reaches ~1,860 by 2046); doing this for 8 (record length x volatility scenario) cells would not fit the time budget. Use --full for the complete family.",
+    "oracle_null_subgrid": "The oracle bound uses a further-reduced subgrid, every 32th member (38 members): oracle_power_bound's cost is dominated by per-null covariance construction (same O(n_obs^2) cost as above), repeated independently for each of the 3 representative alternatives at each of the 8 cells. Use --full for the complete family.",
+    "n_draws_power": "100 Monte-Carlo histories per (end_year, scenario, model) achieved-power estimate (reduced from a starting point of 150 to fit the time budget; --full uses config.DIAGNOSTICS_N_HISTORIES_PAPER).",
+    "n_draws_oracle": "50 draws per Neyman-Pearson test inside the oracle search: oracle cost is dominated by per-null covariance construction, not n_draws (exp2.py's N_DRAWS_RUN note), so this stays small even in --full.",
+    "calibration_draws": {
+      "n_screen": 300,
+      "n_refine": 2000,
+      "n_refine_models": 15,
+      "note": "config.CALIBRATION_*_RUN (or *_PAPER with --full), as in exp1.py."
+    },
+    "seed_family": "seeds = 20261101 + end_year (+100000 for the declining scenario); a new seed family for this experiment, distinct from config.S1_CALIBRATION_SEED (reserved for the primary registered test).",
+    "representative_cycle": {
+      "r": 5.86,
+      "period_years": 4.0,
+      "kappa": 3,
+      "note": "same representative cycle as experiment 2"
+    },
+    "representative_models": "(a) random_walk_cycle_lam1: AR c=0 (random walk) + the representative cycle, lambda=1; (b) ar_c5_cycle_lam1: AR c=5 + the representative cycle, lambda=1; (c) random_walk_lam0: AR c=0, no cycle, lambda=0 (paper Section 5/Appendix J).",
+    "volatility_scenarios": {
+      "flat": "future annual volatility held at config.ANNUAL_VOLATILITY[2026].",
+      "declining": "OLS fit of log-volatility against year over 2017-2026 (not specified by the paper beyond 'declining at the past rate'), extrapolated forward and floored at 0.02.",
+      "implementation": "src.deviation_family.sigma_profile reads config.ANNUAL_VOLATILITY as a module global when no override is passed (which is how model_covariance/simulate_path/simulate_paths_batch call it); src/config.py and src/deviation_family.py may not be edited, so each scenario's extra years (2027..end_year) are added to config.ANNUAL_VOLATILITY in place for the duration of that cell's simulations only, saved and restored via try/finally immediately afterward. config.CALIBRATION_SUPPORT_YEARS (captured at import time from the original 2011-2026 keys) is untouched, so the volatility-shape RMS normalization stays fixed across every record length and scenario, matching its documented 'held fixed' design."
+    },
+    "b_grid": "np.arange(0, 30+0.375, 0.75), 41 points, exactly as exp1.py's b_grid().",
+    "plot": "exp8_power_curves.png averages achieved power and the oracle bound over the 3 representative models at each (end_year, scenario), to show exactly one line per (scenario x bound-type) as requested.",
+    "first_cell_seconds": 28.79227900505066
+  },
+  "full_paper_configuration": false,
+  "elapsed_seconds": 513.980390548706
+}
