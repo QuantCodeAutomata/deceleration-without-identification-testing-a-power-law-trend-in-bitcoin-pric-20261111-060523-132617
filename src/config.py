@@ -18,13 +18,14 @@ PRIMARY_DROPPED_ANCHOR = "2011-06-25"  # Saturday with no close, dropped (Sectio
 PRIMARY_N_PAPER = 820  # number of weekly observations reported in the paper (Section 2)
 
 # The paper's exact daily series (Mt. Gox until 2012-12-31, Bitstamp from 2013-01-01,
-# bitcoincharts.com / Internet Archive, SHA-256 5552aa23e3...) is not obtainable from
-# the Dataloader/Massive market-data path: a smoke test of X:BTCUSD on the QuantX
-# Dataloader found no coverage before November 2013 (Massive's own crypto history
-# starts there). This is a genuine data-coverage limitation, recorded in
-# results/RESULTS.md, not a convenience choice. The realized sample therefore starts
-# once continuous daily coverage is available.
-REALIZED_SAMPLE_START = "2014-01-04"  # first Saturday with reliable Massive BTC coverage
+# bitcoincharts.com / Internet Archive, SHA-256 5552aa23e3...) is not obtainable as a
+# single Dataloader/Massive feed: a smoke test of X:BTCUSD on the QuantX Dataloader
+# found no coverage before November 2013 (Massive's own crypto history starts there).
+# The 2011-2013 segment is instead rebuilt from the same bitcoincharts.com archive the
+# paper cites, preserved by the Internet Archive (see data/data_loader.py docstring);
+# this is a genuine data-source substitution, recorded in results/RESULTS.md, not a
+# convenience choice, since the exact frozen CSV the paper hashes is not reachable.
+REALIZED_SAMPLE_START = PRIMARY_SAMPLE_START  # full paper sample period is covered
 
 # ---------------------------------------------------------------------------
 # Annual volatility profile of weekly log returns (Appendix A)
@@ -113,6 +114,10 @@ GATE_G3_B_VALUE = 5.7
 PAPER_S1_STATISTIC = 3.410
 PAPER_S1_CRITICAL_VALUE = 2.631683520034235
 PAPER_LOWER_BOUND_B = 1.5
+
+# Secondary tests (exp_3, paper Appendix B/C): calibrated critical values.
+PAPER_DRIFT_CRITICAL_VALUE = 3.20558780703057  # seed 20261027
+PAPER_CURVATURE_CRITICAL_VALUE = 3.4266230049087683  # seed 20261028
 PAPER_VALIDATED_POWER_AT_5_7 = 0.26
 
 # ---------------------------------------------------------------------------

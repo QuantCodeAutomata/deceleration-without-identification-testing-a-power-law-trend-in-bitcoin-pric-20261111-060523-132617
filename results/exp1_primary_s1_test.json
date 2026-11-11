@@ -1,24 +1,24 @@
 {
-  "n_observations": 663,
-  "sample_start": "2014-01-04",
+  "n_observations": 819,
+  "sample_start": "2011-01-01",
   "sample_end": "2026-09-19",
   "q_features": 6,
   "n_grid_models": 1216,
   "calibration": {
-    "critical_value": 3.059571466904991,
-    "largest_refined_quantile": 2.6917590057857863,
+    "critical_value": 2.7176747888726567,
+    "largest_refined_quantile": 2.4289377651891937,
     "n_screen": 300,
     "n_refine": 2000,
     "n_refine_models": 15,
     "seed": 20261024
   },
-  "s1_statistic": 1.5180459914056748,
-  "reject_constant_drift": false,
-  "lower_confidence_bound_b": -6.2,
+  "s1_statistic": 3.418593360451979,
+  "reject_constant_drift": true,
+  "lower_confidence_bound_b": 1.4,
   "b_5_7_accepted": true,
   "paper_s1": 3.41,
   "paper_critical_value": 2.631683520034235,
   "paper_lower_bound": 1.5,
   "full_paper_configuration": false,
-  "elapsed_seconds": 1742.5760085582733
+  "elapsed_seconds": 1988.7451992034912
 }

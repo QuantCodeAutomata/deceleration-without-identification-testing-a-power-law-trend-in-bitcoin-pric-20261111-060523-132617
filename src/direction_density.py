@@ -113,6 +113,78 @@ def _log_density_grid(u: np.ndarray, cache: GridCache, b_grid: np.ndarray, q: in
     return ll
 
 
+def _log_density_grid_batch(z: np.ndarray, cache: GridCache, b_grid: np.ndarray,
+                             q: int) -> np.ndarray:
+    """Same as `_log_density_grid` but for a batch of draws at once.
+
+    `z` has shape (n_draws, q). Returns an (n_draws, n_models, n_b) array. Memory
+    scales as n_draws * n_models * n_b, so callers chunk `n_draws` to bound it.
+    """
+    a = np.einsum("dj,mjk,dk->dm", z, cache.Sigma_inv, z)          # (n_draws, n_models)
+    g = np.einsum("dj,mj->dm", z, cache.V)                         # (n_draws, n_models)
+    a_safe = np.clip(a, 1e-300, None)
+    x = np.clip((g / np.sqrt(a_safe))[:, :, None] * b_grid[None, None, :], 0.0, None)
+    scaled_J = scaled_J_sequence(x, q - 1)[-1]                     # (n_draws, n_models, n_b)
+    log_Jq1 = np.log(np.clip(scaled_J, 1e-300, None)) + x ** 2 / 2
+    ll = (-0.5 * cache.logdet[None, :, None]
+          - 0.5 * (b_grid ** 2)[None, None, :] * cache.c[None, :, None]
+          - (q / 2) * np.log(a_safe)[:, :, None] + log_Jq1)
+    ll[a <= 0] = -np.inf
+    return ll
+
+
+def s1_statistic_batch(z_batch: np.ndarray, cache: GridCache, b_grid: np.ndarray,
+                        q: int, chunk: int = 200) -> np.ndarray:
+    """`s1_statistic` evaluated for every row of `z_batch` (shape (n_draws, q)) at
+    once, processed in chunks of `chunk` draws to bound memory. Rows that are zero
+    or produce a non-finite maximized log-likelihood get S1 = 0 (paper Appendix B:
+    "a zero projected vector or any non-finite value stops the computation", which
+    for the Monte-Carlo calibration loop of `simulate_s1_under_null` means that
+    draw contributes 0, matching the per-draw `except ValueError: s1 = 0.0`).
+    """
+    n_draws = z_batch.shape[0]
+    zero_col = int(np.argmin(np.abs(b_grid)))
+    out = np.zeros(n_draws)
+    finite_rows = np.all(np.isfinite(z_batch), axis=1) & ~np.all(np.isclose(z_batch, 0.0), axis=1)
+    for start in range(0, n_draws, chunk):
+        end = min(start + chunk, n_draws)
+        idx = np.arange(start, end)
+        valid = idx[finite_rows[idx]]
+        if valid.size == 0:
+            continue
+        ll = _log_density_grid_batch(z_batch[valid], cache, b_grid, q)
+        best_null = ll[:, :, zero_col].max(axis=1)
+        best_alt = ll.reshape(len(valid), -1).max(axis=1)
+        ok = np.isfinite(best_null) & np.isfinite(best_alt)
+        s1 = np.where(ok, np.maximum(best_alt - best_null, 0.0), 0.0)
+        out[valid] = s1
+    return out
+
+
+def two_sided_statistic_batch(z_batch: np.ndarray, cache: GridCache, b_grid_pos: np.ndarray,
+                               q: int, chunk: int = 200) -> np.ndarray:
+    """Batched `two_sided_statistic` (paper Appendix B symmetry f(u;-bm,Sigma)=f(-u;bm,Sigma))."""
+    n_draws = z_batch.shape[0]
+    b_grid_full = np.concatenate([[0.0], b_grid_pos])
+    out = np.zeros(n_draws)
+    finite_rows = np.all(np.isfinite(z_batch), axis=1) & ~np.all(np.isclose(z_batch, 0.0), axis=1)
+    for start in range(0, n_draws, chunk):
+        end = min(start + chunk, n_draws)
+        idx = np.arange(start, end)
+        valid = idx[finite_rows[idx]]
+        if valid.size == 0:
+            continue
+        ll_pos = _log_density_grid_batch(z_batch[valid], cache, b_grid_full, q)
+        ll_neg = _log_density_grid_batch(-z_batch[valid], cache, b_grid_full, q)
+        best_null = np.maximum(ll_pos[:, :, 0].max(axis=1), ll_neg[:, :, 0].max(axis=1))
+        best_alt = np.maximum(ll_pos.reshape(len(valid), -1).max(axis=1),
+                               ll_neg.reshape(len(valid), -1).max(axis=1))
+        ok = np.isfinite(best_null) & np.isfinite(best_alt)
+        s1 = np.where(ok, np.maximum(best_alt - best_null, 0.0), 0.0)
+        out[valid] = s1
+    return out
+
+
 def s1_statistic(u: np.ndarray, m_by_model, Sigma_by_model,
                   b_grid: np.ndarray, q: int) -> tuple[float, int, float]:
     """S1(u) = max_{theta,b} log f(u; b m_theta, Sigma_theta) - max_theta log f(u; 0, Sigma_theta).

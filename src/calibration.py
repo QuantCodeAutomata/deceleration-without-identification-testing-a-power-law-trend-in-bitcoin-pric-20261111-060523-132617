@@ -12,8 +12,8 @@ import numpy as np
 from scipy import stats
 
 from src import config
-from src.deviation_family import DeviationModel, model_covariance, simulate_path
-from src.direction_density import GridCache, build_grid_cache, s1_statistic
+from src.deviation_family import DeviationModel, model_covariance, simulate_paths_batch
+from src.direction_density import GridCache, build_grid_cache, s1_statistic_batch
 from src.projection import cosine_weights, project_m, sigma_theta
 
 
@@ -42,28 +42,30 @@ def precompute_m_sigma(setup: CalibrationSetup, grid: list[DeviationModel]
 
 def simulate_s1_under_null(setup: CalibrationSetup, null_model: DeviationModel,
                             m_list, sigma_list,
-                            n_draws: int, b_grid: np.ndarray, rng: np.random.Generator
-                            ) -> np.ndarray:
-    """Draw `n_draws` histories of S1 under b=0, with deviations from `null_model`.
+                            n_draws: int, b_grid: np.ndarray, rng: np.random.Generator,
+                            statistic_fn=s1_statistic_batch) -> np.ndarray:
+    """Draw `n_draws` histories of the statistic under b=0, with deviations from
+    `null_model`.
 
     `m_list`/`sigma_list` may be the raw per-model lists or a prebuilt `GridCache`
     (with `sigma_list=None`): the cache is built once per calibration call and
-    reused across every draw and null model, which is what makes the Monte Carlo
-    loop (millions of draws over 1,216 models) tractable.
+    reused across every draw and null model. Simulation and projection are
+    batched over all `n_draws` at once (`simulate_paths_batch`, one matrix
+    multiply for the projection), and the direction-density evaluation is
+    batched in memory-bounded chunks (`s1_statistic_batch` /
+    `two_sided_statistic_batch`), which is what makes the Monte-Carlo loop
+    (millions of draws over 1,216 models) tractable. `statistic_fn` defaults to
+    the primary one-sided batched statistic; the secondary (two-sided) tests of
+    exp_3 pass `two_sided_statistic_batch`, which shares the same call signature.
     """
     cache = m_list if isinstance(m_list, GridCache) else build_grid_cache(m_list, sigma_list)
-    values = np.empty(n_draws)
-    for i in range(n_draws):
-        u_full = simulate_path(null_model, setup.n_full, rng)
-        u_anchor = u_full[setup.anchor_weeks]
-        z = setup.Psi.T @ (u_anchor - setup.X @ np.linalg.solve(
-            setup.X.T @ setup.X, setup.X.T @ u_anchor))
-        try:
-            s1, _, _ = s1_statistic(z, cache, None, b_grid, setup.q)
-        except ValueError:
-            s1 = 0.0
-        values[i] = s1
-    return values
+    u_full_batch = simulate_paths_batch(null_model, setup.n_full, n_draws, rng)  # (n_draws, n_full)
+    u_anchor = u_full_batch[:, setup.anchor_weeks]  # (n_draws, n_obs)
+    # L maps an n_obs-vector to its q-dim projection: z = Psi^T (I - X(X'X)^{-1}X') u.
+    XtX_inv = np.linalg.inv(setup.X.T @ setup.X)
+    L = setup.Psi.T @ (np.eye(setup.X.shape[0]) - setup.X @ XtX_inv @ setup.X.T)  # (q, n_obs)
+    z_batch = u_anchor @ L.T  # (n_draws, q)
+    return statistic_fn(z_batch, cache, b_grid, setup.q)
 
 
 def upper_confidence_limit_for_quantile(draws: np.ndarray, quantile: float,
@@ -87,25 +89,32 @@ def calibrate_critical_value(setup: CalibrationSetup, grid: list[DeviationModel]
                               b_grid: np.ndarray, seed: int,
                               n_screen: int = config.CALIBRATION_SCREEN_DRAWS_RUN,
                               n_refine: int = config.CALIBRATION_REFINE_DRAWS_RUN,
-                              n_refine_models: int = config.CALIBRATION_N_REFINE_RUN
+                              n_refine_models: int = config.CALIBRATION_N_REFINE_RUN,
+                              statistic_fn=s1_statistic_batch
                               ) -> dict:
     """Two-stage calibration (paper Section 4 / Box 1 / Appendix C):
     1. Screen every null member with `n_screen` draws, take its 95% empirical quantile.
     2. Refine the `n_refine_models` hardest (highest-quantile) members with `n_refine` draws.
     3. Critical value = largest refined UCL for the 95% quantile.
+
+    `statistic_fn` selects the statistic being calibrated: the primary one-sided
+    `s1_statistic` (default, exp_1/exp_4) or the secondary `two_sided_statistic`
+    (exp_3), applying the same calibration rule to either (paper Appendix C).
     """
     rng = np.random.default_rng(seed)
     cache = build_grid_cache(m_list, sigma_list)
     screen_quantiles = np.empty(len(grid))
     for idx, model in enumerate(grid):
-        draws = simulate_s1_under_null(setup, model, cache, None, n_screen, b_grid, rng)
+        draws = simulate_s1_under_null(setup, model, cache, None, n_screen, b_grid, rng,
+                                        statistic_fn=statistic_fn)
         screen_quantiles[idx] = np.quantile(draws, config.CALIBRATION_QUANTILE)
     hardest_idx = np.argsort(screen_quantiles)[::-1][:n_refine_models]
 
     refined_ucls = np.empty(len(hardest_idx))
     refined_quantiles = np.empty(len(hardest_idx))
     for j, idx in enumerate(hardest_idx):
-        draws = simulate_s1_under_null(setup, grid[idx], cache, None, n_refine, b_grid, rng)
+        draws = simulate_s1_under_null(setup, grid[idx], cache, None, n_refine, b_grid, rng,
+                                        statistic_fn=statistic_fn)
         refined_quantiles[j] = np.quantile(draws, config.CALIBRATION_QUANTILE)
         refined_ucls[j] = upper_confidence_limit_for_quantile(
             draws, config.CALIBRATION_QUANTILE, config.CALIBRATION_UCL_LEVEL)

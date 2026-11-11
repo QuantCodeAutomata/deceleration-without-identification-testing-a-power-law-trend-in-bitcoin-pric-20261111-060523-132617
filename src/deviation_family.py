@@ -21,6 +21,7 @@ from itertools import product
 from typing import Callable
 
 import numpy as np
+from scipy.linalg import toeplitz
 from scipy.signal import lfilter
 
 from src import config
@@ -209,5 +210,51 @@ def simulate_path(model: DeviationModel, n_full: int, rng: np.random.Generator) 
         c = rho_c * np.exp(-1j * omega)
         x_ext = np.concatenate(([z0], innov[:-1]))
         z = lfilter(np.array([1.0 + 0j]), np.array([1.0 + 0j, -c]), x_ext)
+        u = u + z.real
+    return u
+
+
+def simulate_paths_batch(model: DeviationModel, n_full: int, n_draws: int,
+                          rng: np.random.Generator) -> np.ndarray:
+    """Simulate `n_draws` independent full-grid paths at once (shape (n_draws,
+    n_full)), batching every recursion across draws so a Monte-Carlo calibration
+    needs a handful of vectorized array operations per null model instead of a
+    Python-level loop over draws (paper Appendix B/C: the persistence and cycle
+    recursions are linear in the innovations, so batching over draws is exact,
+    not an approximation).
+    """
+    sigma = sigma_profile(model.lam, np.arange(n_full))
+    e = rng.standard_normal((n_draws, n_full)) * sigma[None, :]
+    spec = model.persistence
+    if spec.kind == "ar":
+        rho = 1.0 - spec.param / config.AR_SCALE
+        u = lfilter([1.0], [1.0, -rho], e, axis=1)
+    elif spec.kind == "fractional":
+        psi = _fractional_psi(spec.param, n_full)
+        # Full causal convolution for every draw at once via one Toeplitz matmul
+        # (lower-triangular Toeplitz of psi), equivalent to np.convolve(e, psi)[:n] per row.
+        L = toeplitz(psi, np.zeros(n_full))
+        u = e @ L.T
+    elif spec.kind == "local_level":
+        eps = e
+        eta = rng.standard_normal((n_draws, n_full)) * sigma[None, :]
+        w = np.cumsum(eta, axis=1)
+        u = eps + spec.param * w
+    else:
+        raise ValueError(spec.kind)
+
+    cyc = model.cycle
+    if cyc.r != 0.0:
+        period_weeks = cyc.period_years * config.WEEKS_PER_YEAR
+        omega = 2 * np.pi / period_weeks
+        rho_c = 0.5 ** (1.0 / (cyc.kappa * period_weeks))
+        scale = cyc.r * config.SIGMA_BAR
+        inn = rng.standard_normal((n_draws, n_full, 2)) * np.sqrt(1 - rho_c ** 2) * scale
+        innov = (inn[..., 0] + 1j * inn[..., 1]).astype(complex)  # (n_draws, n_full)
+        state0 = rng.standard_normal((n_draws, 2)) * scale
+        z0 = state0[:, 0] + 1j * state0[:, 1]  # (n_draws,)
+        c = rho_c * np.exp(-1j * omega)
+        x_ext = np.concatenate([z0[:, None], innov[:, :-1]], axis=1)
+        z = lfilter(np.array([1.0 + 0j]), np.array([1.0 + 0j, -c]), x_ext, axis=1)
         u = u + z.real
     return u
