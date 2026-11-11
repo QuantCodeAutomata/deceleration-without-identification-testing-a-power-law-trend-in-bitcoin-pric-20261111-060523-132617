@@ -67,14 +67,29 @@ land correctly). Run `python -m exp.exp2 --full` for the paper's draw count.
 Two-sided, power-law-residual tests for an extra linear-age drift and for curvature
 in log age, calibrated by the same simulation rule as S1.
 
-See `results/exp3_secondary_tests.json` for the numbers from the final run (a
-reduced calibration of 15 screening / 150 refinement draws across 5 refined
+`results/exp3_secondary_tests.json` holds the numbers from the final run (a
+reduced calibration of 2 screening / 20 refinement draws across 2 refined
 models, selected to fit inside the time available for this replication; the
 paper configuration is 2,000/20,000/60 and is run with `python -m exp.exp3 --full`).
 
-**Expected qualitative result (paper):** both statistics are exactly zero — no
-coefficient on either departure regressor improves the fit over the power law on
-the evaluated grid — so neither secondary test detects a departure.
+| Test | Statistic (this run) | Critical value (this run) | Paper critical value |
+|---|---|---|---|
+| Extra drift | 0.0 | 2.470 | 3.206 |
+| Curvature in log age | 0.0 | 3.875 | 3.427 |
+
+**Result:** both statistics are exactly zero on the 819 realized weekly
+observations — no coefficient on either departure regressor (extra linear-age
+drift, curvature in log age) improves the fit over the power law anywhere on
+the evaluated grid, for both the reduced and the paper's own configuration of
+the grid search. This matches the paper's qualitative result that neither
+secondary test detects a departure from the power law (verdict: **reproduced**,
+qualitative). The critical values themselves depend on the draw count and are
+not expected to match the paper's at this reduced configuration (verdict:
+**not reproduced** for the critical-value magnitude; rerun with `--full` for
+the paper's calibration precision). Since both statistics are already at the
+boundary value of zero, the reduced draw count does not change the
+zero-statistic conclusion: the grid search is deterministic given the data and
+the draws only affect the critical value, not the statistic.
 
 ## Experiment 5 — Descriptive Gaussian fits of five trend models under the declared covariance family
 

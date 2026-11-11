@@ -1,0 +1,27 @@
+{
+  "n_observations": 819,
+  "q_features": 6,
+  "n_grid_models": 1216,
+  "full_paper_configuration": false,
+  "tests": {
+    "drift": {
+      "critical_value": 2.470283754777185,
+      "largest_refined_quantile": 2.0222017552337923,
+      "seed": 20261027,
+      "statistic": 0.0,
+      "reject_power_law_adequacy": false,
+      "is_zero": true,
+      "paper_critical_value": 3.20558780703057
+    },
+    "curvature": {
+      "critical_value": 3.874920332603928,
+      "largest_refined_quantile": 1.239155661389547,
+      "seed": 20261028,
+      "statistic": 0.0,
+      "reject_power_law_adequacy": false,
+      "is_zero": true,
+      "paper_critical_value": 3.4266230049087683
+    }
+  },
+  "elapsed_seconds": 304.0649240016937
+}
