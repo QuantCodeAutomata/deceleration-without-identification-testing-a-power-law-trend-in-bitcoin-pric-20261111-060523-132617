@@ -1,0 +1,113 @@
+{
+  "seed": 20261101,
+  "n_days": 5740,
+  "nw_lags": 1460,
+  "band_cutoff_day": 3650,
+  "cycle_config": {
+    "period_days": 1277.5,
+    "r": 5.86,
+    "kappa": 3
+  },
+  "n_histories": 15,
+  "per_history_seconds": 2.5773377418518066,
+  "full_paper_configuration": false,
+  "results": [
+    {
+      "deviation_type": "random_walk_profile",
+      "n_histories": 15,
+      "adf_reject_rate": 0.6,
+      "kpss_accept_rate": 0.0,
+      "both_rate": 0.0,
+      "newey_west_coverage": 0.4,
+      "band_rate": 0.2,
+      "paper_expected": {
+        "adf": 0.44,
+        "kpss": 0.06,
+        "both": 0.05,
+        "nw": 0.35,
+        "band": 0.32
+      }
+    },
+    {
+      "deviation_type": "random_walk_constant",
+      "n_histories": 15,
+      "adf_reject_rate": 0.6,
+      "kpss_accept_rate": 0.13333333333333333,
+      "both_rate": 0.13333333333333333,
+      "newey_west_coverage": 0.4,
+      "band_rate": 0.13333333333333333,
+      "paper_expected": {
+        "adf": 0.18,
+        "kpss": 0.04,
+        "both": 0.03,
+        "nw": 0.34,
+        "band": 0.09
+      }
+    },
+    {
+      "deviation_type": "rw_cycle_profile",
+      "n_histories": 15,
+      "adf_reject_rate": 0.0,
+      "kpss_accept_rate": 0.8,
+      "both_rate": 0.0,
+      "newey_west_coverage": 0.7333333333333333,
+      "band_rate": 0.5333333333333333,
+      "paper_expected": {
+        "adf": 0.2,
+        "kpss": 0.15,
+        "both": 0.04,
+        "nw": 0.36,
+        "band": 0.24
+      }
+    },
+    {
+      "deviation_type": "rw_cycle_constant",
+      "n_histories": 15,
+      "adf_reject_rate": 0.0,
+      "kpss_accept_rate": 0.6666666666666666,
+      "both_rate": 0.0,
+      "newey_west_coverage": 0.7333333333333333,
+      "band_rate": 0.4666666666666667,
+      "paper_expected": {
+        "adf": 0.06,
+        "kpss": 0.12,
+        "both": 0.01,
+        "nw": 0.33,
+        "band": 0.1
+      }
+    },
+    {
+      "deviation_type": "ar_hl2.2y_cycle",
+      "n_histories": 15,
+      "adf_reject_rate": 0.06666666666666667,
+      "kpss_accept_rate": 0.8666666666666667,
+      "both_rate": 0.06666666666666667,
+      "newey_west_coverage": 0.7333333333333333,
+      "band_rate": 0.4,
+      "paper_expected": {
+        "adf": 0.2,
+        "kpss": 0.2,
+        "both": 0.06,
+        "nw": 0.44,
+        "band": 0.38
+      }
+    },
+    {
+      "deviation_type": "ar_hl0.55y_cycle",
+      "n_histories": 15,
+      "adf_reject_rate": 0.0,
+      "kpss_accept_rate": 0.8,
+      "both_rate": 0.0,
+      "newey_west_coverage": 1.0,
+      "band_rate": 0.4,
+      "paper_expected": {
+        "adf": 0.31,
+        "kpss": 0.6,
+        "both": 0.19,
+        "nw": 0.62,
+        "band": 0.44
+      }
+    }
+  ],
+  "elapsed_seconds": 71.32891416549683
+}

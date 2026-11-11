@@ -1,0 +1,69 @@
+{
+  "n_observations": 663,
+  "sample_start": "2014-01-04",
+  "sample_end": "2026-09-19",
+  "q_features": 6,
+  "n_draws": 15,
+  "alpha": 0.05,
+  "trend_oracle_bounds": [
+    {
+      "description": "random walk with a cycle (c=0, lam=1)",
+      "b": 5.7,
+      "bound": 0.0,
+      "worst_null_index": 5
+    },
+    {
+      "description": "slowly reverting AR, half-life~113.5 weeks (c=5.0), with a cycle",
+      "b": 5.7,
+      "bound": 0.0,
+      "worst_null_index": 80
+    },
+    {
+      "description": "random walk with constant volatility (c=0, r=0, lam=0)",
+      "b": 5.7,
+      "bound": 0.0,
+      "worst_null_index": 17
+    }
+  ],
+  "reversion_oracle_bounds": [
+    {
+      "half_life_years": 0.55,
+      "ar_c": 20.0,
+      "bound": 0.13333333333333333,
+      "worst_null_index": 23
+    },
+    {
+      "half_life_years": 1.1,
+      "ar_c": 10.0,
+      "bound": 0.06666666666666667,
+      "worst_null_index": 19
+    },
+    {
+      "half_life_years": 2.2,
+      "ar_c": 5.0,
+      "bound": 0.0,
+      "worst_null_index": 21
+    }
+  ],
+  "n_null_grid_trend": 1216,
+  "n_null_grid_reversion": 76,
+  "assumptions": {
+    "representative_cycle": {
+      "r": 5.86,
+      "period_years": 4.0,
+      "kappa": 3
+    },
+    "reversion_null_family": "restricted to AR, c=0 (random-walk) members of the declared grid across all cycle/volatility-shape variations (76 of 1216 members), not the full 1216-member family, as a tractable, unambiguously non-reverting null subgrid.",
+    "n_draws_reduced": "n_draws reduced below config.ORACLE_N_SIMULATIONS_RUN for the non-full run: oracle_power_bound's cost against a 1216-member null grid is dominated by per-null covariance construction, not n_draws; use --full for config.ORACLE_N_SIMULATIONS_PAPER draws."
+  },
+  "full_paper_configuration": false,
+  "elapsed_seconds": 191.91574239730835,
+  "paper_trend_range": [
+    0.34,
+    0.43
+  ],
+  "paper_reversion_range": [
+    0.08,
+    0.2
+  ]
+}

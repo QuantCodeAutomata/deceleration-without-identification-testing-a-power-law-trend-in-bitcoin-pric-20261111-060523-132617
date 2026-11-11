@@ -1,0 +1,231 @@
+{
+  "n_observations": 663,
+  "n_grid_models": 1216,
+  "models": [
+    {
+      "model_name": "constant_drift",
+      "params": {
+        "a": 3.063577703457556,
+        "c": 0.009521389428357918
+      },
+      "log_likelihood": 680.4220163525292,
+      "delta_loglik_vs_powerlaw": -2.5690570277140523,
+      "theta_index": 331,
+      "n_trend_params": 2
+    },
+    {
+      "model_name": "power_law",
+      "params": {
+        "a": -25.726754202532756,
+        "b": 5.485373305735747
+      },
+      "log_likelihood": 682.9910733802433,
+      "delta_loglik_vs_powerlaw": 0.0,
+      "theta_index": 479,
+      "n_trend_params": 2
+    },
+    {
+      "model_name": "drift_and_log_age",
+      "params": {
+        "a": -36.88218012128158,
+        "c": -0.0037755100805012894,
+        "b": 7.603455515204805
+      },
+      "log_likelihood": 683.6728777064725,
+      "delta_loglik_vs_powerlaw": 0.6818043262292122,
+      "theta_index": 479,
+      "n_trend_params": 3
+    },
+    {
+      "model_name": "logistic",
+      "params": {
+        "K": 96800.67051443232,
+        "r": 1.0,
+        "s0": 863.2612275804
+      },
+      "log_likelihood": 682.0452872412824,
+      "delta_loglik_vs_powerlaw": -0.9457861389608979,
+      "theta_index": 306,
+      "n_trend_params": 3
+    },
+    {
+      "model_name": "gompertz",
+      "params": {
+        "K": 4523886.493466246,
+        "beta": -16.630350918261456,
+        "r": 0.001638352338518988
+      },
+      "log_likelihood": 681.2399306473742,
+      "delta_loglik_vs_powerlaw": -1.7511427328690843,
+      "theta_index": 331,
+      "n_trend_params": 3
+    }
+  ],
+  "origin_profile": [
+    {
+      "tau_weeks": -104,
+      "log_likelihood": 683.0800899463494,
+      "n_used": 663,
+      "delta_loglik": 0.08901656610612463
+    },
+    {
+      "tau_weeks": -96,
+      "log_likelihood": 683.1177807515443,
+      "n_used": 663,
+      "delta_loglik": 0.12670737130099496
+    },
+    {
+      "tau_weeks": -88,
+      "log_likelihood": 683.1437934043232,
+      "n_used": 663,
+      "delta_loglik": 0.15272002407994023
+    },
+    {
+      "tau_weeks": -80,
+      "log_likelihood": 683.1597629268763,
+      "n_used": 663,
+      "delta_loglik": 0.16868954663300428
+    },
+    {
+      "tau_weeks": -72,
+      "log_likelihood": 683.1670699726614,
+      "n_used": 663,
+      "delta_loglik": 0.1759965924180733
+    },
+    {
+      "tau_weeks": -64,
+      "log_likelihood": 683.1668871110884,
+      "n_used": 663,
+      "delta_loglik": 0.17581373084510687
+    },
+    {
+      "tau_weeks": -56,
+      "log_likelihood": 683.1602153642976,
+      "n_used": 663,
+      "delta_loglik": 0.1691419840543631
+    },
+    {
+      "tau_weeks": -48,
+      "log_likelihood": 683.1479133269482,
+      "n_used": 663,
+      "delta_loglik": 0.15683994670496304
+    },
+    {
+      "tau_weeks": -40,
+      "log_likelihood": 683.1307205787455,
+      "n_used": 663,
+      "delta_loglik": 0.13964719850218899
+    },
+    {
+      "tau_weeks": -32,
+      "log_likelihood": 683.1092766596128,
+      "n_used": 663,
+      "delta_loglik": 0.1182032793694816
+    },
+    {
+      "tau_weeks": -24,
+      "log_likelihood": 683.0841365621797,
+      "n_used": 663,
+      "delta_loglik": 0.09306318193637253
+    },
+    {
+      "tau_weeks": -16,
+      "log_likelihood": 683.0557834668922,
+      "n_used": 663,
+      "delta_loglik": 0.06471008664891542
+    },
+    {
+      "tau_weeks": -8,
+      "log_likelihood": 683.024639276383,
+      "n_used": 663,
+      "delta_loglik": 0.033565896139748475
+    },
+    {
+      "tau_weeks": 0,
+      "log_likelihood": 682.9910733802433,
+      "n_used": 663,
+      "delta_loglik": 0.0
+    },
+    {
+      "tau_weeks": 8,
+      "log_likelihood": 682.955409986924,
+      "n_used": 663,
+      "delta_loglik": -0.03566339331928248
+    },
+    {
+      "tau_weeks": 16,
+      "log_likelihood": 682.9179342880773,
+      "n_used": 663,
+      "delta_loglik": -0.07313909216600223
+    },
+    {
+      "tau_weeks": 24,
+      "log_likelihood": 682.8788976655425,
+      "n_used": 663,
+      "delta_loglik": -0.11217571470081111
+    },
+    {
+      "tau_weeks": 32,
+      "log_likelihood": 682.8385221091763,
+      "n_used": 663,
+      "delta_loglik": -0.15255127106695454
+    },
+    {
+      "tau_weeks": 40,
+      "log_likelihood": 682.7970039805109,
+      "n_used": 663,
+      "delta_loglik": -0.19406939973237058
+    },
+    {
+      "tau_weeks": 48,
+      "log_likelihood": 682.7545172316144,
+      "n_used": 663,
+      "delta_loglik": -0.23655614862889252
+    },
+    {
+      "tau_weeks": 56,
+      "log_likelihood": 682.711216167979,
+      "n_used": 663,
+      "delta_loglik": -0.27985721226423266
+    },
+    {
+      "tau_weeks": 64,
+      "log_likelihood": 682.667237828243,
+      "n_used": 663,
+      "delta_loglik": -0.3238355520003324
+    },
+    {
+      "tau_weeks": 72,
+      "log_likelihood": 682.6227040404548,
+      "n_used": 663,
+      "delta_loglik": -0.36836933978850084
+    },
+    {
+      "tau_weeks": 80,
+      "log_likelihood": 682.5777232043386,
+      "n_used": 663,
+      "delta_loglik": -0.4133501759047249
+    },
+    {
+      "tau_weeks": 88,
+      "log_likelihood": 682.5323918405082,
+      "n_used": 663,
+      "delta_loglik": -0.4586815397350392
+    },
+    {
+      "tau_weeks": 96,
+      "log_likelihood": 682.4867959407796,
+      "n_used": 663,
+      "delta_loglik": -0.5042774394636353
+    },
+    {
+      "tau_weeks": 104,
+      "log_likelihood": 682.4410121481931,
+      "n_used": 663,
+      "delta_loglik": -0.5500612320502114
+    }
+  ],
+  "origin_profile_peak_tau_weeks": -72,
+  "origin_profile_peak_delta_loglik": 0.1759965924180733,
+  "elapsed_seconds": 280.8232035636902
+}
